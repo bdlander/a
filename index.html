@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar e Typing Effect</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    /* Global reset */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow-x: hidden;
+        background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.02"%3E%3Ccircle cx="6" cy="6" r="6"/%3E%3Ccircle cx="26" cy="6" r="6"/%3E%3Ccircle cx="46" cy="6" r="6"/%3E%3Ccircle cx="66" cy="6" r="6"/%3E%3Ccircle cx="86" cy="6" r="6"/%3E%3Ccircle cx="6" cy="26" r="6"/%3E%3Ccircle cx="26" cy="26" r="6"/%3E%3Ccircle cx="46" cy="26" r="6"/%3E%3Ccircle cx="66" cy="26" r="6"/%3E%3Ccircle cx="86" cy="26" r="6"/%3E%3Ccircle cx="6" cy="46" r="6"/%3E%3Ccircle cx="26" cy="46" r="6"/%3E%3Ccircle cx="46" cy="46" r="6"/%3E%3Ccircle cx="66" cy="46" r="6"/%3E%3Ccircle cx="86" cy="46" r="6"/%3E%3Ccircle cx="6" cy="66" r="6"/%3E%3Ccircle cx="26" cy="66" r="6"/%3E%3Ccircle cx="46" cy="66" r="6"/%3E%3Ccircle cx="66" cy="66" r="6"/%3E%3Ccircle cx="86" cy="66" r="6"/%3E%3Ccircle cx="6" cy="86" r="6"/%3E%3Ccircle cx="26" cy="86" r="6"/%3E%3Ccircle cx="46" cy="86" r="6"/%3E%3Ccircle cx="66" cy="86" r="6"/%3E%3Ccircle cx="86" cy="86" r="6"/%3E%3C/g%3E%3C/svg%3E');
+        background-repeat: repeat;
+    }
+    a { color:#fff; text-decoration:none; }
+
+    /* Navbar */
+    nav {
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:12px 20px;
+        background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+        backdrop-filter: blur(20px);
+        border-bottom:1px solid rgba(255,255,255,0.1);
+        z-index:1000;
+        flex-wrap:wrap;
+    }
+    nav ul {
+        display:flex;
+        list-style:none;
+        flex-wrap:wrap;
+        transition: max-height 0.3s ease;
+    }
+    nav ul li {
+        margin: 8px 12px;
+    }
+    nav ul li a {
+        font-weight:400;
+        transition:opacity 0.3s ease;
+    }
+    nav ul li a:hover { opacity:0.7; }
+
+    .glass-button {
+        padding:10px 18px;
+        background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+        backdrop-filter: blur(20px);
+        border:1px solid rgba(255,255,255,0.1);
+        border-radius:50px;
+        font-weight:400;
+        cursor:pointer;
+        transition: transform 0.3s ease, background 0.3s ease;
+        margin-top: 8px;
+    }
+    .glass-button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+    }
+
+    /* Hamburger */
+    .hamburger {
+        display:none;
+        flex-direction:column;
+        cursor:pointer;
+        gap:5px;
+        margin-left: 10px;
+    }
+    .hamburger div {
+        width:25px;
+        height:3px;
+        background:#fff;
+        border-radius:2px;
+        transition: all 0.3s ease;
+    }
+
+    /* Sections */
+    section {
+        padding:80px 15px;
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+    }
+
+    /* Responsive h1 with clamp */
+    h1 {
+        font-weight: 600;
+        font-size: clamp(1.2rem, 6vw, 2.5rem);
+        margin-bottom: 15px;
+        max-width: 90vw;
+        word-wrap: break-word;
+    }
+
+    #typed {
+        display:inline-block;
+        max-width: 100%;
+        white-space: normal; /* allow wrapping */
+        border-right:0.15em solid #fff;
+        animation: blink-caret 0.75s step-end infinite;
+    }
+    @keyframes blink-caret {
+        0%,100%{border-color:transparent;}
+        50%{border-color:#fff;}
+    }
+
+    /* Mobile-first responsive */
+    @media (max-width:768px){
+        nav { flex-direction:row; justify-content:space-between; align-items:center; }
+        nav ul {
+            flex-direction:column;
+            overflow:hidden;
+            max-height:0;
+            width:100%;
+        }
+        nav ul.active { max-height:500px; }
+        nav ul li { margin:12px 0; text-align:center; }
+        .hamburger { display:flex; }
+    }
+    @media (min-width:769px){
+        nav ul { max-height:none; flex-direction:row; }
+        .hamburger { display:none; }
+    }
+</style>
+</head>
+<body>
+    <nav>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <span class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </span>
+            <ul id="nav-menu">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </div>
+        <a href="https://www.tiktok.com/@mnt_editz_" target="_blank" class="glass-button">Segue-me no TikTok</a>
+    </nav>
+
+    <section id="home">
+        <h1><span id="typed"></span></h1>
+    </section>
+
+    <script>
+        // Typing effect
+        const texts = [
+            "É sempre mais escuro antes do amanhecer",
+            "Eleva o teu jogo digital",
+            "Vive com intenção, não por padrão",
+            "Compromisso e obsessão vão sempre superar talento"
+        ];
+        const speed = 100;
+        const pause = 2150;
+        let txtIndex = 0;
+        let charIndex = 0;
+        const typedEl = document.getElementById("typed");
+
+        function typeWriter() {
+            if (charIndex < texts[txtIndex].length) {
+                typedEl.innerHTML += texts[txtIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, speed);
+            } else {
+                setTimeout(eraseText, pause);
+            }
+        }
+
+        function eraseText() {
+            if (charIndex > 0) {
+                typedEl.innerHTML = texts[txtIndex].substring(0, charIndex-1);
+                charIndex--;
+                setTimeout(eraseText, speed/1);
+            } else {
+                txtIndex = (txtIndex+1)%texts.length;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        typeWriter();
+
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
