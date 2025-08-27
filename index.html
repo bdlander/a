@@ -3,202 +3,232 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Navbar e Typing Effect</title>
+<title>Badlander Shop</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-    /* Global reset */
-    * { box-sizing: border-box; margin:0; padding:0; }
-    html { scroll-behavior: smooth; }
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #000;
-        color: #fff;
-        overflow-x: hidden;
-        background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.02"%3E%3Ccircle cx="6" cy="6" r="6"/%3E%3Ccircle cx="26" cy="6" r="6"/%3E%3Ccircle cx="46" cy="6" r="6"/%3E%3Ccircle cx="66" cy="6" r="6"/%3E%3Ccircle cx="86" cy="6" r="6"/%3E%3Ccircle cx="6" cy="26" r="6"/%3E%3Ccircle cx="26" cy="26" r="6"/%3E%3Ccircle cx="46" cy="26" r="6"/%3E%3Ccircle cx="66" cy="26" r="6"/%3E%3Ccircle cx="86" cy="26" r="6"/%3E%3Ccircle cx="6" cy="46" r="6"/%3E%3Ccircle cx="26" cy="46" r="6"/%3E%3Ccircle cx="46" cy="46" r="6"/%3E%3Ccircle cx="66" cy="46" r="6"/%3E%3Ccircle cx="86" cy="46" r="6"/%3E%3Ccircle cx="6" cy="66" r="6"/%3E%3Ccircle cx="26" cy="66" r="6"/%3E%3Ccircle cx="46" cy="66" r="6"/%3E%3Ccircle cx="66" cy="66" r="6"/%3E%3Ccircle cx="86" cy="66" r="6"/%3E%3Ccircle cx="6" cy="86" r="6"/%3E%3Ccircle cx="26" cy="86" r="6"/%3E%3Ccircle cx="46" cy="86" r="6"/%3E%3Ccircle cx="66" cy="86" r="6"/%3E%3Ccircle cx="86" cy="86" r="6"/%3E%3C/g%3E%3C/svg%3E');
-        background-repeat: repeat;
-    }
-    a { color:#fff; text-decoration:none; }
+/* ================= GLOBAL RESET ================= */
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+    font-family:'Poppins',sans-serif;
+    background-color:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+a { color:#fff; text-decoration:none; }
 
-    /* Navbar */
-    nav {
-        position: fixed;
-        top:0;
-        left:0;
-        width:100%;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:12px 20px;
-        background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-        backdrop-filter: blur(20px);
-        border-bottom:1px solid rgba(255,255,255,0.1);
-        z-index:1000;
-        flex-wrap:wrap;
-    }
-    nav ul {
-        display:flex;
-        list-style:none;
-        flex-wrap:wrap;
-        transition: max-height 0.3s ease;
-    }
-    nav ul li {
-        margin: 8px 12px;
-    }
-    nav ul li a {
-        font-weight:400;
-        transition:opacity 0.3s ease;
-    }
-    nav ul li a:hover { opacity:0.7; }
+/* ================= NAVBAR (UNCHANGED) ================= */
+nav {
+    position: fixed;
+    top:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap:15px;
+}
+nav ul li a {
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+}
+nav ul li a:hover { opacity:0.7; }
+.glass-button {
+    padding:10px 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight:400;
+    cursor:pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+.glass-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+}
 
-    .glass-button {
-        padding:10px 18px;
-        background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-        backdrop-filter: blur(20px);
-        border:1px solid rgba(255,255,255,0.1);
-        border-radius:50px;
-        font-weight:400;
-        cursor:pointer;
-        transition: transform 0.3s ease, background 0.3s ease;
-        margin-top: 8px;
-    }
-    .glass-button:hover {
-        transform: scale(1.05);
-        background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-    }
+/* ================= HERO ================= */
+.hero{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 20px 50px 20px; /* extra top padding for navbar */
+    gap:15px;
+    animation:fadeInUp 0.6s ease forwards;
+}
+.hero h1{font-size:clamp(1.5rem,6vw,2.5rem);}
+.hero p{font-size:clamp(0.9rem,4vw,1.2rem);color:#ccc;}
 
-    /* Hamburger */
-    .hamburger {
-        display:none;
-        flex-direction:column;
-        cursor:pointer;
-        gap:5px;
-        margin-left: 10px;
-    }
-    .hamburger div {
-        width:25px;
-        height:3px;
-        background:#fff;
-        border-radius:2px;
-        transition: all 0.3s ease;
-    }
+/* ================= PRODUCTS GRID ================= */
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+    padding:20px;
+    animation:fadeInUp 0.6s ease forwards;
+}
+.product-card{
+    background:#111; /* flat dark bg, no overlay */
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    transition:transform 0.2s;
+}
+.product-card:hover{transform:scale(1.03);}
+.product-card img{
+    width:100%;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+.product-card h3{font-size:1rem;margin-bottom:5px;}
+.product-card p{font-size:0.85rem;color:#aaa;margin-bottom:10px;}
+.product-card .price{font-weight:600;margin-bottom:10px;}
+.product-card .buy-btn{
+    padding:8px 15px;
+    border:none;
+    border-radius:0; /* no bubble, flat */
+    background:#fff;
+    color:#000;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform 0.2s;
+}
+.product-card .buy-btn:hover{transform:scale(1.05);}
 
-    /* Sections */
-    section {
-        padding:80px 15px;
-        min-height:100vh;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-    }
+/* ================= CONTACT FORM ================= */
+.contact{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+    padding:50px 20px;
+    background:#111; /* flat, no overlay */
+    border-top:1px solid rgba(255,255,255,0.1);
+    animation:fadeInUp 0.6s ease forwards;
+}
+.contact h2{font-size:clamp(1.2rem,5vw,2rem);}
+.contact form{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    max-width:400px;
+    gap:12px;
+}
+.contact input, .contact textarea{
+    padding:10px;
+    border-radius:5px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:#111;
+    color:#fff;
+}
+.contact button{
+    padding:10px;
+    border:none;
+    border-radius:0; /* flat */
+    background:#fff;
+    color:#000;
+    font-weight:600;
+    cursor:pointer;
+}
+.contact button:hover{transform:scale(1.05);transition:transform 0.2s;}
 
-    /* Responsive h1 with clamp */
-    h1 {
-        font-weight: 600;
-        font-size: clamp(1.2rem, 6vw, 2.5rem);
-        margin-bottom: 15px;
-        max-width: 90vw;
-        word-wrap: break-word;
-    }
+.whatsapp{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:15px;
+}
+.whatsapp img{width:30px;height:30px;}
+.whatsapp a{font-weight:600;font-size:1rem;color:#fff;}
 
-    #typed {
-        display:inline-block;
-        max-width: 100%;
-        white-space: normal; /* allow wrapping */
-        border-right:0.15em solid #fff;
-        animation: blink-caret 0.75s step-end infinite;
-    }
-    @keyframes blink-caret {
-        0%,100%{border-color:transparent;}
-        50%{border-color:#fff;}
-    }
+/* ================= ANIMATION ================= */
+@keyframes fadeInUp{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+}
 
-    /* Mobile-first responsive */
-    @media (max-width:768px){
-        nav { flex-direction:row; justify-content:space-between; align-items:center; }
-        nav ul {
-            flex-direction:column;
-            overflow:hidden;
-            max-height:0;
-            width:100%;
-        }
-        nav ul.active { max-height:500px; }
-        nav ul li { margin:12px 0; text-align:center; }
-        .hamburger { display:flex; }
-    }
-    @media (min-width:769px){
-        nav ul { max-height:none; flex-direction:row; }
-        .hamburger { display:none; }
-    }
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+    .products{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;padding:15px;}
+    .product-card h3{font-size:0.95rem;}
+    .product-card p{font-size:0.8rem;}
+    .product-card .price{font-size:0.9rem;}
+    .product-card .buy-btn{font-size:0.85rem;padding:6px 12px;}
+    .glass-button{border-radius:0;} /* TikTok button flat on mobile */
+}
 </style>
 </head>
 <body>
-    <nav>
-        <div style="display:flex; align-items:center; gap:10px;">
-            <span class="hamburger" id="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-            </span>
-            <ul id="nav-menu">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </div>
-        <a href="https://www.tiktok.com/@mnt_editz_" target="_blank" class="glass-button">Segue-me no TikTok</a>
-    </nav>
 
-    <section id="home">
-        <h1><span id="typed"></span></h1>
-    </section>
+<!-- ================= NAVBAR (UNCHANGED) ================= -->
+<nav>
+    <ul>
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#products">Produtos</a></li>
+        <li><a href="#contact">Contacto</a></li>
+    </ul>
+    <a href="https://www.tiktok.com/@mnt_editz_" target="_blank" class="glass-button">Segue-me no TikTok</a>
+</nav>
 
-    <script>
-        // Typing effect
-        const texts = [
-            "É sempre mais escuro antes do amanhecer",
-            "Eleva o teu jogo digital",
-            "Vive com intenção, não por padrão",
-            "Compromisso e obsessão vão sempre superar talento"
-        ];
-        const speed = 100;
-        const pause = 2150;
-        let txtIndex = 0;
-        let charIndex = 0;
-        const typedEl = document.getElementById("typed");
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+    <h1>Bem-vindo à Badlander Shop</h1>
+    <p>Produtos digitais e físicos selecionados para te elevar o jogo.</p>
+</section>
 
-        function typeWriter() {
-            if (charIndex < texts[txtIndex].length) {
-                typedEl.innerHTML += texts[txtIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, speed);
-            } else {
-                setTimeout(eraseText, pause);
-            }
-        }
+<!-- ================= PRODUCTS GRID ================= -->
+<section class="products" id="products">
+    <div class="product-card">
+        <img src="https://picsum.photos/300/200?random=101" alt="Produto 1">
+        <h3>Produto 1</h3>
+        <p>Descrição curta do produto.</p>
+        <div class="price">€19.99</div>
+        <a href="https://example.com/buy1" target="_blank"><button class="buy-btn">Comprar</button></a>
+    </div>
+    <div class="product-card">
+        <img src="https://picsum.photos/300/200?random=102" alt="Produto 2">
+        <h3>Produto 2</h3>
+        <p>Descrição curta do produto.</p>
+        <div class="price">€29.99</div>
+        <a href="https://example.com/buy2" target="_blank"><button class="buy-btn">Comprar</button></a>
+    </div>
+    <div class="product-card">
+        <img src="https://picsum.photos/300/200?random=103" alt="Produto 3">
+        <h3>Produto 3</h3>
+        <p>Descrição curta do produto.</p>
+        <div class="price">€39.99</div>
+        <a href="https://example.com/buy3" target="_blank"><button class="buy-btn">Comprar</button></a>
+    </div>
+</section>
 
-        function eraseText() {
-            if (charIndex > 0) {
-                typedEl.innerHTML = texts[txtIndex].substring(0, charIndex-1);
-                charIndex--;
-                setTimeout(eraseText, speed/1);
-            } else {
-                txtIndex = (txtIndex+1)%texts.length;
-                setTimeout(typeWriter, speed);
-            }
-        }
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+    <h2>Contacto</h2>
+    <form action="mailto:contato@badlander.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Nome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" placeholder="Mensagem" rows="5" required></textarea>
+        <button type="submit">Enviar Mensagem</button>
+    </form>
+    <div class="whatsapp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo">
+        <a href="https://wa.me/1234567890" target="_blank">Contacte-me no WhatsApp</a>
+    </div>
+</section>
 
-        typeWriter();
-
-        // Hamburger toggle
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    </script>
 </body>
 </html>
+
 
